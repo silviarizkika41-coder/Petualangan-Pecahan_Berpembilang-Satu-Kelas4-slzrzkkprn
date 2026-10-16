@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petualangan Pecahan – Kelas 4 SD</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#e8f5ff;--card:#fff;--ink:#1d2a5b;--mut:#51608f;--soft:#e9eefc;--line:#c9d6f5;--y:#ffc93c;--ok:#1fa97a;--bad:#e5484d;--pri:#5b5bf0;--onpri:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a3a;--card:#1b2552;--ink:#eef2ff;--mut:#aab6e6;--soft:#2a356b;--line:#3a478a;--ok:#3ccf9a;--bad:#ff7a7f;--pri:#8a8aff;--onpri:#10163a}}
+:root[data-theme="dark"]{--bg:#121a3a;--card:#1b2552;--ink:#eef2ff;--mut:#aab6e6;--soft:#2a356b;--line:#3a478a;--ok:#3ccf9a;--bad:#ff7a7f;--pri:#8a8aff;--onpri:#10163a}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Fredoka','Baloo 2','Comic Sans MS',ui-rounded,sans-serif;font-size:18px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header{text-align:center;padding:18px 8px 6px}
+h1{font-size:clamp(28px,6vw,44px);margin:0;line-height:1.1;font-weight:700}
+h1 span{display:inline-block;background:var(--y);color:#1d2a5b;padding:0 12px;border-radius:14px;transform:rotate(-2deg)}
+header p{margin:8px 0 0;color:var(--mut)}
+nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+nav button{font:inherit;font-weight:600;border:3px solid var(--ink);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--ink);color:var(--card)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:4px solid var(--y);outline-offset:2px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 6px 0 var(--ink)}
+h2{margin:0 0 8px;font-size:26px}h3{margin:0 0 6px;font-size:21px}
+.goal{background:var(--y);color:#1d2a5b;border-color:#1d2a5b}
+.key{background:var(--soft);border-radius:16px;padding:12px 16px;border-left:8px solid var(--pri)}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-weight:700;margin:0 2px}
+.fr b{border-bottom:3px solid currentColor;padding:0 5px;font-weight:700}.fr i{font-style:normal;padding:0 5px}
+.btn{font:inherit;font-weight:600;border:3px solid var(--ink);background:var(--pri);color:var(--onpri);padding:8px 20px;border-radius:14px;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+.chips button{font:inherit;font-weight:600;width:44px;height:44px;border-radius:50%;border:3px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--y);color:#1d2a5b}
+.bars{display:grid;gap:8px;margin:10px 0}
+.brow{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center}
+.bar{display:grid;grid-template-columns:repeat(var(--n),1fr);height:34px;border:3px solid var(--ink);border-radius:10px;overflow:hidden}
+.bar i{border-right:2px solid var(--ink);background:var(--soft)}.bar i:last-child{border-right:0}.bar i:first-child{background:var(--c)}
+select,input[type=text]{font:inherit;padding:6px 10px;border:3px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink)}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-weight:500;margin:8px 0;padding:10px 14px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);cursor:pointer}
+.opt.ok{background:var(--ok);color:#10163a;border-color:var(--ok)}.opt.no{background:var(--bad);color:#10163a;border-color:var(--bad)}
+.fb{min-height:28px;font-weight:600}
+.score{display:flex;justify-content:space-between;font-weight:600;margin-bottom:8px}
+.pcards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pc{font:inherit;font-size:26px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px;border:3px solid var(--ink);border-radius:20px;background:var(--card);color:var(--ink);cursor:pointer;box-shadow:0 5px 0 var(--ink)}
+.pc.ok{background:var(--ok);color:#10163a}.pc.no{background:var(--bad);color:#10163a}
+.slots{display:flex;gap:8px;justify-content:center;margin:12px 0}
+.slot{width:84px;height:70px;border:3px dashed var(--ink);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.slot.f{border-style:solid;background:var(--y);color:#1d2a5b}
+.tile{font:inherit;font-size:22px;display:flex;align-items:center;justify-content:center;min-width:84px;height:70px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.q{padding:10px 0;border-bottom:2px dashed var(--line)}.q:last-child{border:0}
+.q .m{font-weight:700}.q.good .m{color:var(--ok)}.q.bad .m{color:var(--bad)}
+.big{font-size:56px;text-align:center}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}}
+@media (max-width:520px){body{font-size:16px}.slot,.tile{min-width:70px;width:70px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Petualangan <span>Pecahan</span> 🍕</h1>
+<p>Membandingkan dan mengurutkan pecahan berpembilang satu</p>
+</header>
+<nav role="tablist">
+<button role="tab" data-t="materi" aria-selected="true">📖 Materi</button>
+<button role="tab" data-t="kuis" aria-selected="false">❓ Kuis</button>
+<button role="tab" data-t="game" aria-selected="false">🎮 Game</button>
+<button role="tab" data-t="latihan" aria-selected="false">✏️ Latihan Soal</button>
+</nav>
+
+<section id="materi" class="on">
+<div class="card goal"><h3>🎯 Tujuan belajar</h3>Aku bisa membandingkan dan mengurutkan pecahan berpembilang satu dengan benda konkret atau gambar.</div>
+
+<div class="card">
+<h2>1. Apa itu pecahan berpembilang satu?</h2>
+<p>Bayangkan sebuah pizza dibagi sama besar. Satu potong dari seluruh potongan ditulis <span class="fr"><b>1</b><i>penyebut</i></span>. Angka di atas (pembilang) selalu <b>1</b>. Angka di bawah (penyebut) menunjukkan jumlah potongan sama besar.</p>
+<p><b>Pilih jumlah potongan:</b></p>
+<div class="row chips" id="chips"></div>
+<div class="row" style="margin-top:12px"><div id="pz1"></div><div style="flex:1;min-width:200px"><div class="big" id="fr1"></div><div id="cap1" style="text-align:center"></div></div></div>
+<div class="bars" id="bar1"></div>
+</div>
+
+<div class="card">
+<h2>2. Mana yang lebih besar?</h2>
+<p>Pilih dua pecahan, lalu lihat gambarnya. Potongan sama besar kita bandingkan panjangnya.</p>
+<div class="row"><select id="sa" aria-label="Pecahan pertama"></select><span>dibanding</span><select id="sb" aria-label="Pecahan kedua"></select></div>
+<div class="bars" id="bar2"></div>
+<div class="key" id="res2"></div>
+</div>
+
+<div class="card">
+<h2>3. Kunci rahasia 🔑</h2>
+<div class="key"><b>Makin besar penyebutnya, makin kecil potongannya.</b><br>Pizza dibagi 2 orang, potongannya besar. Dibagi 8 orang, potongannya kecil. Jadi <span class="fr"><b>1</b><i>2</i></span> &gt; <span class="fr"><b>1</b><i>8</i></span>.</div>
+</div>
+
+<div class="card">
+<h2>4. Mengurutkan pecahan</h2>
+<p>Urutkan dari <b>terkecil ke terbesar</b>: <span class="fr"><b>1</b><i>2</i></span>, <span class="fr"><b>1</b><i>6</i></span>, <span class="fr"><b>1</b><i>3</i></span>, <span class="fr"><b>1</b><i>4</i></span></p>
+<p>Lihat gambar, lalu cari potongan yang paling pendek sampai yang paling panjang.</p>
+<div class="bars" id="bar4"></div>
+<div class="key">Urutan: <span class="fr"><b>1</b><i>6</i></span> &lt; <span class="fr"><b>1</b><i>4</i></span> &lt; <span class="fr"><b>1</b><i>3</i></span> &lt; <span class="fr"><b>1</b><i>2</i></span>. Sebaliknya, dari terbesar: penyebut paling kecil dulu.</div>
+</div>
+</section>
+
+<section id="kuis">
+<div class="card" id="quiz"></div>
+</section>
+
+<section id="game">
+<div class="card">
+<h2>🍕 Game 1: Duel Pizza</h2>
+<div id="g1"></div>
+</div>
+<div class="card">
+<h2>🧩 Game 2: Susun Kartu</h2>
+<div id="g2"></div>
+</div>
+</section>
+
+<section id="latihan">
+<div class="card">
+<h2>Latihan Soal</h2>
+<p>Kerjakan semua soal, lalu tekan <b>Periksa jawaban</b>. Untuk soal mengurutkan, tulis dengan koma, contoh: <b>1/8,1/4,1/2</b></p>
+<div id="lat"></div>
+<div class="row" style="margin-top:12px"><button class="btn" id="chk">Periksa jawaban</button><button class="btn" id="rst" style="background:var(--card);color:var(--ink)">Ulangi</button></div>
+<div class="big" style="font-size:30px" id="latres"></div>
+</div>
+</section>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const COL=['','','#ff6b8b','#ffc93c','#3ccf9a','#5bb8ff','#8a63f0','#ff9f43','#2ec4b6','#f15bb5','#6c8cff','#e07a5f','#43aa8b'];
+const fr=d=>`<span class="fr"><b>1</b><i>${d}</i></span>`;
+const fx=s=>s.replace(/1\/(\d+)/g,(m,d)=>fr(d));
+const bar=d=>`<div class="brow"><span>${fr(d)}</span><div class="bar" style="--n:${d};--c:${COL[d]}">${'<i></i>'.repeat(d)}</div></div>`;
+function pz(d,s=130){let a=2*Math.PI/d,r=46,h=`<svg viewBox="0 0 100 100" width="${s}" height="${s}" role="img" aria-label="pizza dibagi ${d}">`;
+for(let i=0;i<d;i++){let a1=-Math.PI/2+i*a,a2=a1+a;h+=`<path d="M50 50L${50+r*Math.cos(a1)} ${50+r*Math.sin(a1)}A${r} ${r} 0 0 1 ${50+r*Math.cos(a2)} ${50+r*Math.sin(a2)}Z" fill="${i?'var(--soft)':COL[d]}" stroke="var(--ink)" stroke-width="2"/>`}return h+'</svg>'}
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* tabs */
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x==b));
+ document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==b.dataset.t));scrollTo(0,0)});
+
+/* materi */
+function m1(d){$('#pz1').innerHTML=pz(d,150);$('#fr1').innerHTML=fr(d);
+ $('#cap1').innerHTML=`Pizza dibagi menjadi <b>${d}</b> potong sama besar. Kita ambil <b>1</b> potong.`;$('#bar1').innerHTML=bar(d);
+ document.querySelectorAll('#chips button').forEach(b=>b.setAttribute('aria-pressed',b.textContent==d))}
+$('#chips').innerHTML=[2,3,4,5,6,7,8,9,10].map(d=>`<button aria-pressed="false">${d}</button>`).join('');
+document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>m1(+b.textContent));m1(4);
+const opts=[2,3,4,5,6,8,10,12].map(d=>`<option value="${d}">1/${d}</option>`).join('');
+$('#sa').innerHTML=opts;$('#sb').innerHTML=opts;$('#sa').value=3;$('#sb').value=6;
+function m2(){let a=+$('#sa').value,b=+$('#sb').value;$('#bar2').innerHTML=bar(a)+bar(b);
+ $('#res2').innerHTML=a==b?`Penyebutnya sama, jadi ${fr(a)} = ${fr(b)}.`:a<b?`${fr(a)} &gt; ${fr(b)} karena potongan ${a} bagian lebih besar daripada potongan ${b} bagian.`:`${fr(a)} &lt; ${fr(b)} karena potongan ${a} bagian lebih kecil daripada potongan ${b} bagian.`}
+$('#sa').onchange=$('#sb').onchange=m2;m2();
+$('#bar4').innerHTML=[6,4,3,2].map(bar).join('');
+
+/* kuis */
+const Q=[
+["Manakah pecahan yang menunjukkan 1 bagian dari 4 bagian sama besar?",["1/2","1/3","1/4","1/8"],2,"Penyebut 4 artinya utuh dibagi 4 bagian sama besar."],
+["Mana yang lebih besar: 1/3 atau 1/6?",["1/3","1/6","Sama besar"],0,"Penyebut 3 lebih kecil dari 6, jadi potongannya lebih besar."],
+["Pecahan yang paling kecil adalah ...",["1/2","1/5","1/8","1/4"],2,"Penyebut paling besar (8) berarti potongan paling kecil."],
+["Urutan dari terkecil ke terbesar adalah ...",["1/2, 1/4, 1/8","1/8, 1/4, 1/2","1/4, 1/8, 1/2"],1,"1/8 paling kecil, lalu 1/4, terakhir 1/2."],
+["Tanda yang tepat: 1/5 ... 1/7",["&gt;","&lt;","="],0,"Potongan seperlima lebih besar daripada sepertujuh."],
+["Ani makan 1/4 pizza, Budi makan 1/8 pizza dengan ukuran sama. Siapa makan lebih banyak?",["Ani","Budi","Sama banyak"],0,"1/4 lebih besar daripada 1/8, jadi Ani makan lebih banyak."],
+["Pecahan terbesar dari 1/9, 1/3, 1/6, dan 1/12 adalah ...",["1/9","1/3","1/6","1/12"],1,"Penyebut terkecil (3) memberi potongan terbesar."],
+["Mengapa 1/2 lebih besar daripada 1/10?",["Karena 2 lebih besar dari 10","Karena dibagi 2 potongannya lebih besar daripada dibagi 10","Karena pembilangnya berbeda"],1,"Makin sedikit pembagian, makin besar potongannya."]];
+let qi=0,qs=0;
+function quiz(){const c=$('#quiz');
+ if(qi>=Q.length){c.innerHTML=`<div class="big">${qs>=7?'🏆':qs>=5?'⭐':'💪'}</div><h2 style="text-align:center">Nilaimu ${qs*100/Q.length|0}</h2><p style="text-align:center">Benar ${qs} dari ${Q.length} soal. ${qs>=7?'Hebat sekali!':'Baca materi lagi, lalu coba ulang.'}</p><div class="row"><button class="btn" id="qr">Main lagi</button></div>`;
+  $('#qr').onclick=()=>{qi=0;qs=0;quiz()};return}
+ const q=Q[qi];c.innerHTML=`<div class="score"><span>Soal ${qi+1}/${Q.length}</span><span>Skor ${qs}</span></div><h3>${fx(q[0])}</h3>`+q[1].map((o,i)=>`<button class="opt" data-i="${i}">${fx(o)}</button>`).join('')+`<div class="fb" id="qf"></div>`;
+ c.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ok=i==q[2];
+  c.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(+x.dataset.i==q[2])x.classList.add('ok')});
+  if(ok)qs++;else b.classList.add('no');
+  $('#qf').innerHTML=(ok?'✅ Benar! ':'❌ Belum tepat. ')+fx(q[3])+`<div class="row" style="margin-top:8px"><button class="btn" id="qn">${qi==Q.length-1?'Lihat nilai':'Lanjut'}</button></div>`;
+  $('#qn').onclick=()=>{qi++;quiz()}})}
+quiz();
+
+/* game 1 */
+let g1;
+function G1(){g1={r:0,s:0,st:0};g1n()}
+function g1n(){const c=$('#g1');
+ if(g1.r>=10){c.innerHTML=`<div class="big">${g1.s>=80?'🏆':'⭐'}</div><p style="text-align:center">Skor akhir: <b>${g1.s}</b> dari 100</p><div class="row"><button class="btn" id="g1r">Main lagi</button></div>`;$('#g1r').onclick=G1;return}
+ let d1=rnd(2,12),d2;do d2=rnd(2,12);while(d2==d1);const big=Math.random()<.5,ans=big?Math.min(d1,d2):Math.max(d1,d2);
+ c.innerHTML=`<div class="score"><span>Ronde ${g1.r+1}/10</span><span>Skor ${g1.s} 🔥${g1.st}</span></div><p style="text-align:center;margin:4px">Ketuk pizza yang <b>${big?'lebih besar':'lebih kecil'}</b> potongannya!</p><div class="pcards">${[d1,d2].map(d=>`<button class="pc" data-d="${d}">${pz(d,110)}${fr(d)}</button>`).join('')}</div><div class="fb" id="g1f" style="text-align:center"></div>`;
+ c.querySelectorAll('.pc').forEach(b=>b.onclick=()=>{const ok=+b.dataset.d==ans;
+  c.querySelectorAll('.pc').forEach(x=>{x.disabled=true;if(+x.dataset.d==ans)x.classList.add('ok')});
+  if(ok){g1.s+=10;g1.st++}else{b.classList.add('no');g1.st=0}
+  $('#g1f').textContent=ok?'Benar! 🎉':'Ups, yang benar ditandai hijau.';g1.r++;setTimeout(g1n,1100)})}
+G1();
+
+/* game 2 */
+let g2;
+function G2(){g2={r:0,s:0};g2n()}
+function g2n(){const c=$('#g2');
+ if(g2.r>=5){c.innerHTML=`<div class="big">${g2.s>=80?'🏆':'⭐'}</div><p style="text-align:center">Skor akhir: <b>${g2.s}</b> dari 100</p><div class="row"><button class="btn" id="g2r">Main lagi</button></div>`;$('#g2r').onclick=G2;return}
+ const n=g2.r<3?3:4,ds=[];while(ds.length<n){let d=rnd(2,12);if(!ds.includes(d))ds.push(d)}
+ const desc=Math.random()<.5,exp=[...ds].sort((a,b)=>desc?a-b:b-a);let got=[],mis=0;
+ c.innerHTML=`<div class="score"><span>Ronde ${g2.r+1}/5</span><span>Skor ${g2.s}</span></div><p style="text-align:center;margin:4px">Ketuk kartu dari yang <b>${desc?'terbesar ke terkecil':'terkecil ke terbesar'}</b></p><div class="slots" id="sl">${exp.map(()=>'<div class="slot"></div>').join('')}</div><div class="row" id="tl">${shuffle(ds).map(d=>`<button class="tile" data-d="${d}">${fr(d)}</button>`).join('')}</div><div class="fb" id="g2f" style="text-align:center;margin-top:8px"></div>`;
+ c.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{const d=+b.dataset.d;
+  if(d==exp[got.length]){const s=$('#sl').children[got.length];s.innerHTML=fr(d);s.classList.add('f');got.push(d);b.style.visibility='hidden';
+   if(got.length==n){const p=Math.max(5,20-5*mis);g2.s+=p;g2.r++;$('#g2f').innerHTML=`Benar! +${p} 🎉 <button class="btn" id="g2x">Lanjut</button>`;$('#g2x').onclick=g2n}}
+  else{mis++;b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');$('#g2f').textContent='Belum tepat, bandingkan lagi penyebutnya.'}})}
+G2();
+
+/* latihan */
+const L=[
+{t:'cmp',a:2,b:5},{t:'cmp',a:7,b:3},{t:'cmp',a:4,b:4},{t:'cmp',a:6,b:9},{t:'cmp',a:10,b:8},{t:'cmp',a:3,b:12},
+{t:'ord',l:[4,2,8],up:1},{t:'ord',l:[3,6,5,2],up:0},
+{t:'mc',q:"Dina membagi pita jadi 3 bagian sama panjang, Eli jadi 5 bagian sama panjang. Pita sama panjang. Satu bagian milik siapa yang lebih panjang?",o:["Dina","Eli","Sama panjang"],a:0},
+{t:'mc',q:"Pecahan 1/9, 1/2, 1/5. Mana yang paling besar?",o:["1/9","1/2","1/5"],a:1}];
+function lat(){$('#lat').innerHTML=L.map((x,i)=>{let h=`<div class="q" id="q${i}"><span class="m"></span><b>${i+1}.</b> `;
+ if(x.t=='cmp')h+=`Bandingkan: ${fr(x.a)} <select id="a${i}"><option value="">?</option><option>&gt;</option><option>&lt;</option><option>=</option></select> ${fr(x.b)}`;
+ if(x.t=='ord')h+=`Urutkan dari <b>${x.up?'terkecil ke terbesar':'terbesar ke terkecil'}</b>: ${x.l.map(fr).join(', ')}<br><input type="text" id="a${i}" placeholder="contoh: 1/8,1/4,1/2" size="22" autocomplete="off">`;
+ if(x.t=='mc')h+=`${fx(x.q)}<br><select id="a${i}"><option value="">Pilih jawaban</option>${x.o.map((o,j)=>`<option value="${j}">${o}</option>`).join('')}</select>`;
+ return h+`<div class="hint" style="color:var(--mut)"></div></div>`}).join('');$('#latres').textContent=''}
+function key(x){if(x.t=='cmp')return x.a==x.b?'=':x.a<x.b?'>':'<';
+ if(x.t=='ord')return [...x.l].sort((a,b)=>x.up?b-a:a-b).map(d=>'1/'+d).join(',');return String(x.a)}
+$('#chk').onclick=()=>{let ok=0;L.forEach((x,i)=>{let v=$('#a'+i).value.replace(/\s/g,'').replace(/;/g,',');if(x.t=='cmp')v=v.replace('&gt;','>');
+ const k=key(x),good=v==k,q=$('#q'+i);q.className='q '+(good?'good':'bad');q.querySelector('.m').textContent=good?'✅ ':'❌ ';
+ q.querySelector('.hint').innerHTML=good?'':'Kunci: '+fx(x.t=='mc'?x.o[x.a]:k.replace(/,/g,', ').replace(/^([<>=])$/,m=>m=='>'?'&gt;':m=='<'?'&lt;':m))+' (penyebut makin kecil = potongan makin besar)';if(good)ok++});
+ $('#latres').innerHTML=`Benar ${ok} dari ${L.length} soal · Nilai ${ok*10} ${ok>=8?'🌟':'💪'}`};
+$('#rst').onclick=lat;lat();
+</script>
+</body>
+</html>
